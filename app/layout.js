@@ -1,17 +1,10 @@
-import localFont from "next/font/local";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ClerkProvider } from "@clerk/nextjs";
+import {Inter} from "next/font/google";
+import { shadesOfPurple } from "@clerk/themes";
+import Header from "@/components/Header.jsx";
+const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "ProjectX",
   description: "Project management app better than jira",
@@ -19,12 +12,25 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+
+  <ClerkProvider appearance={{baseTheme:shadesOfPurple}}>
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${inter.className} dotted-background`} >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange>
+            <Header/>
+          <main className="min-h-screen">{children}</main>
+          <footer className="container mx-auto px-4 text-center text-gray-200">
+            <p>Made with love by Kartik</p>
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
+  </ClerkProvider>
+
+  
   );
 }
