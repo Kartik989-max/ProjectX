@@ -3,7 +3,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import {Inter} from "next/font/google";
 import { shadesOfPurple } from "@clerk/themes";
-import Header from "@/components/Header.jsx";
+import Header from "@/components/header.jsx";
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "ProjectX",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange>
             <Header/>
           <main className="min-h-screen">{children}</main>
+          <Toaster richColors/>
           <footer className="container mx-auto px-4 text-center text-gray-200">
             <p>Made with love by Kartik</p>
           </footer>
