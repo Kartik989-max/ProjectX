@@ -142,14 +142,12 @@ export default function SprintManager({
   const [status, setStatus] = useState(sprint.status);
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const {
     fn: updateStatus,
     loading,
     error,
     data: updatedStatus,
   } = useFetch(updateSprintStatus);
-
   const startDate = new Date(sprint.startDate);
   const endDate = new Date(sprint.endDate);
   const now = new Date();
@@ -196,6 +194,20 @@ export default function SprintManager({
       }
     }
   }, [searchParams, sprints]);
+
+
+  useEffect(()=>{
+    const sprintId = searchParams.get('sprint');
+    if(sprintId && sprintId !== sprint.id){
+      const selectedSprint = sprints.find((s)=>s.id===sprintId);
+      if(selectedSprint){
+        setSprint(selectedSprint);
+        setStatus(selectedSprint.status);
+      }
+    }
+
+  },[searchParams,sprints])
+
 
   const handleSprintChange = (value) => {
     const selectedSprint = sprints.find((s) => s.id === value);

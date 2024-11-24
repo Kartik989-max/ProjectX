@@ -52,7 +52,121 @@ export async function getIssuesForSprint(sprintId) {
     include:{
       assignee:true,
       reporter:true,
+    },
+  });
+  return issues;
+}
+
+export async function updateIssueOrder(updatedIssues) {
+  const {userId,orgId}=auth();
+  if(!userId || !orgId){
+    throw new Error("Unauthorized");
+  }
+
+  await db.$transaction(async (prisma)=>{
+    for (const issue of updatedIssues){
+      await prisma.issue.update({
+        where:{id:issue.id},
+        data:{
+          status:issue.status,
+          order:issue.order,
+        }
+      })
     }
   })
-  return issues;
+  return {success:true};
+}
+
+export async function deleteIssue(issueId) {
+  const {userId,orgId} = auth();
+  if(!userId || !orgId) {
+    throw new Error("Unauthorized");
+  }
+  const user = await db.user.findUnique({
+    where:{clerkUserId:userId},
+  })
+  if(!user){
+    throw new Error("User not found")
+  }
+  const issue = await db.issue.findUnique({
+    where:{id:projectId},
+    include:{project:true},
+  })
+  if(!issue){
+    throw new Error("Issue not found");
+  }
+  if(issue.reporterId!==user.id &&
+    !issue.project.adminIds.include(user.id)
+  ){
+    throw new Error("You don't have permission to delete this issue");
+  }
+
+  await db.issue.delete({where:{id:issueId}})
+  return {success:true};
+}
+export async function updateIssue(issueId, data) {
+  const { userId, orgId } = auth();
+
+  if (!userId || !orgId) {
+    throw new Error("Unauthorized");
+  }
+
+  try {
+    const issue = await db.issue.findUnique({
+      where: { id: issueId },
+      include: { project: true },
+    });
+
+    if (!issue) {
+      throw new Error("Issue not found");
+    }
+
+    if (issue.project.organizationId !== orgId) {
+      throw new Error("Unauthorized");
+    }
+
+    const updatedIssue = await db.issue.update({
+      where: { id: issueId },
+      data: {
+        status: data.status,
+        priority: data.priority,
+      },
+      include: {
+        assignee: true,
+        reporter: true,
+      },
+    });
+
+    return updatedIssue;
+  } catch (error) {
+    throw new Error("Error updating issue: " + error.message);
+  }
+}
+
+export async function getUserIssues(userId) {
+  const {orgId} = auth()
+  if(!userId || !orgId){
+    throw new Error("No user id or organization id found");
+  }
+  const user = await db.user.findUnique({
+    where:{clerkUserId:userId},
+  });
+  if(!user){
+    throw new Error("User not found")
+  }
+  const issues = await db.issue.findMany({
+    where:{
+      OR:[{assigneeId:user.id},{reporterId:user.id}],
+      project:{
+        organizationId:orgId,
+      },
+    },
+    include:{
+      project:true,
+      assignee:true,
+      reporter:true,
+    },
+    orderBy:{updatedAt:'desc'}
+  })
+  return issues; 
 }

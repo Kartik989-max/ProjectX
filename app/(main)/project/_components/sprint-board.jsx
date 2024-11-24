@@ -13,7 +13,8 @@ import { BarLoader } from 'react-spinners';
 import IssueCard from '@/components/issue-card';
 import { toast } from 'sonner';
 import { updateSprintStatus } from '@/action/sprint';
-
+import { updateIssueOrder } from '@/action/issues';
+import BoardFilters from './board-filters';
 
 
 const reorder = (list,startIndex,endIndex)=>{
@@ -53,6 +54,14 @@ const SprintBoard = ({sprints,projectId,orgId}) => {
       fetchIssues(currentSprint.id);
     }
 
+    const handleFilterChange = (newFilteredIssues)=>{
+      setFilteredIssues(newFilteredIssues);
+    }
+    const {
+      fn:updateIssueOrderFn,
+      loading:updateIssuesLoading,
+      error:updateIssuesError,
+    } = useFetch(updateIssueOrder)
     const onDragEnd=async (result)=>{
         if(currentSprint.status==="PLANNED"){
           toast.warning("Start the sprint to update board");
@@ -99,7 +108,7 @@ const SprintBoard = ({sprints,projectId,orgId}) => {
 
         const sortedIssues=newOrderedData.sort((a,b)=>a.order-b.order);
         setIssues(newOrderedData,sortedIssues)
-        // updateIssueOrder(sortedIssues)
+        updateIssueOrderFn(sortedIssues)
 
     }
 
@@ -116,7 +125,21 @@ const SprintBoard = ({sprints,projectId,orgId}) => {
         projectId={projectId}
       />
 
-      {issuesLoading && <BarLoader className='mt-4' width={'100%'} color='#36d7b7'/>}
+      {issues && !issuesLoading && (
+        <BoardFilters 
+          issues={issues} onFilterChange={handleFilterChange}
+        />
+        
+      )}
+
+      {updateIssuesError && (
+        <p className='text-red-500 mt-2'>{updateIssuesError.message}</p>
+      )}
+      {(updateIssuesLoading || issuesLoading) && (
+        <BarLoader className='mt-4' width={'100%'} color="#36d7b7"/>
+      )}
+
+
       {/* Kanban Board */}
 
       <DragDropContext onDragEnd={onDragEnd}>
@@ -132,21 +155,35 @@ const SprintBoard = ({sprints,projectId,orgId}) => {
 
 
                   {/* ISSUES */}
-                  {issues ?.filter(
+                  {filteredIssues ?.filter(
                     (issue)=>issue.status === column.key
                   ).map((issue,index)=>(
                     <Draggable
                       key={issue.id}
                       draggableId={issue.id}
                       index={index}
+                      isDragDisabled={updateIssuesLoading}
                     >
-
                       {(provided)=>{
                         return (
                           <div ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}>
-                              <IssueCard issue={issue}/>
+                    <IssueCard issue={issue} 
+                    onDelete={()=>fetchIssues(currentSprint.id)}
+                    onUpdate={(updated)=>
+                                  setIssues((issues)=>
+                                    issues.map((issue)=>{
+                                      if(issue.id===updated.id)
+                                        return updated;
+                                      return issue;
+                                      
+                                    })
+                                  )
+                                  }
+                                  
+                                
+                                />
                           </div>
                         )
                       }}
