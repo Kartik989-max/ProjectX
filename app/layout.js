@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import {Inter} from "next/font/google";
 import { shadesOfPurple } from "@clerk/themes";
-import Header from "@/components/header.jsx";
+import Header from "@/components/header";
 import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
