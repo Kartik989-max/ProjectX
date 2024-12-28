@@ -9,21 +9,21 @@ import Link from "next/link";
 import faqs from "@/data/faqs"
 const features = [
   {
-    title: "Intuitive Kanban Boards",
+    title: "Effortless Task Management",
     description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit Lorem, ipsum dolor sit amet ",
+      "Admins can quickly create sprints, assign tasks to team members, and set priorities to ensure work is completed efficiently and on time",
     icon: Layout,
   },
   {
-    title: "Powerful Sprint Planning",
+    title: "Intuitive User Interface",
     description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit Lorem, ipsum dolor sit amet ",
+      "Built with ShadCN, Project Nest’s clean and modern interface ensures smooth navigation and effortless task tracking for every team member.",
     icon: CalendarHeart,
   },
   {
-    title: "Comprehenive Reporting",
+    title: "Advanced Admin Controls",
     description:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit Lorem, ipsum dolor sit amet ",
+      "Admins have access to exclusive features, including sprint oversight, task monitoring, and enhanced organizational tools to streamline project workflows.",
     icon: BarChart,
   },
 ];
@@ -38,19 +38,19 @@ export default function Home() {
           <span className="flex mx-auto gap-3 sm:gp-4 items-center">
             with{" "}
             <Image
-              src="/logo.png"
+              src="/download.png"
               width={400}
               alt="Logo"
               height={80}
-              className="h-14 sm:h-24 w-auto object-contain"
+              className="h-14 sm:h-20 w-auto object-contain"
             />
           </span>
         </h1>
         <p className="text-xl text-grey-300 mb-10 max-w-3xl mx-auto">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        The ultimate project management solution for corporate teams.
         </p>
         <Link href="/onboarding">
-          <Button size="lg" className="mr-2">
+          <Button size="lg" className="mr-2 animate-pulse">
             Get Started <ChevronRight size={18} />
           </Button>
         </Link>
@@ -62,7 +62,7 @@ export default function Home() {
       </section>
 
       {/* Key Feature  */}
-      <section id="features" className="bg-gray-900 py-20 px-5">
+      <section id="features" className="bg-zinc-950 py-20 px-5">
         <div className="mx-auto container">
           <h3 className="text-3xl font-bold mb-12 text-center">Key Feature</h3>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -94,7 +94,7 @@ export default function Home() {
 
 
 
-      <section  className="bg-gray-900 py-20 px-5">
+      <section  className="bg-zinc-950 py-20 px-5">
         <div className="mx-auto container">
           <h3 className="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h3> 
          <Accordion type="single" collapsible className="w-full">

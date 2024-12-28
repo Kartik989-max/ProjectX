@@ -7,7 +7,7 @@ import Header from "@/components/header";
 import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
-  title: "ProjectX",
+  title: "ProjectNest",
   description: "Project management app better than jira",
 };
 
