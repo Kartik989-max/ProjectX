@@ -83,19 +83,17 @@ Make sure you have the following installed:
 
 ### Home Page
 ![Screenshot 2024-12-29 043804](https://github.com/user-attachments/assets/105e7139-d159-4c05-a24f-a6cabd91845e)
-![Screenshot 2024-12-29 043818](https://github.com/user-attachments/assets/5ce51bca-d4dd-41a1-9d26-615ab4a3910b)
-![Screenshot 2024-12-29 043840](https://github.com/user-attachments/assets/0d2f1964-058e-4e13-9ee0-4a193383c9bb)
 
 ### Authentication
-![Authentication](![Screenshot 2024-12-29 044049](https://github.com/user-attachments/assets/0174ab3f-1f0b-4260-b838-28dd1283824c)
+[Screenshot 2024-12-29 044049](https://github.com/user-attachments/assets/0174ab3f-1f0b-4260-b838-28dd1283824c)
 
 ### Task Management
-![Task Management](![Screenshot 2024-12-29 044734](https://github.com/user-attachments/assets/1f77e5b4-f3b2-4265-bd45-e7ee8bd1d292)
+![Screenshot 2024-12-29 044734](https://github.com/user-attachments/assets/1f77e5b4-f3b2-4265-bd45-e7ee8bd1d292)
 )
 
 ### Admin Dashboard
-![Admin Dashboard](![Screenshot 2024-12-29 044323](https://github.com/user-attachments/assets/6138e6d0-6ea5-429f-b563-f4bc4dbaa4a8)
-)
+![Screenshot 2024-12-29 044323](https://github.com/user-attachments/assets/6138e6d0-6ea5-429f-b563-f4bc4dbaa4a8)
+
 
 
 ---
