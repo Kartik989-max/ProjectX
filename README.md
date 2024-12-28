@@ -3,8 +3,7 @@
 Project Nest is a project management web app designed to streamline workflows and enhance productivity for corporate teams. With powerful task management features, intuitive design, and advanced admin controls, Project Nest empowers teams to collaborate effectively and meet deadlines effortlessly.
 
 ## Live Demo
-[Check out the live app here!](projectnestjs.vercel.app
-)  
+[Check out the live app here!](https://projectnestjs.vercel.app)  
 
 
 ---
@@ -85,7 +84,7 @@ Make sure you have the following installed:
 ![Screenshot 2024-12-29 043804](https://github.com/user-attachments/assets/105e7139-d159-4c05-a24f-a6cabd91845e)
 
 ### Authentication
-[Screenshot 2024-12-29 044049](https://github.com/user-attachments/assets/0174ab3f-1f0b-4260-b838-28dd1283824c)
+![Screenshot 2024-12-29 044049](https://github.com/user-attachments/assets/0174ab3f-1f0b-4260-b838-28dd1283824c)
 
 ### Task Management
 ![Screenshot 2024-12-29 044734](https://github.com/user-attachments/assets/1f77e5b4-f3b2-4265-bd45-e7ee8bd1d292)
